@@ -4,7 +4,13 @@ const URL = require("./models/task");
 const port = process.env.PORT || 3000;
 const userRouter = require("./routes/task");
 const { connectDB } = require("./connection");
-connectDB("mongodb://127.0.0.1:27017/taskmanager-api");
+connectDB()
+  .then(() => {
+    console.log("connected to MOngoDB atlas");
+  })
+  .catch((err) => {
+    console.log(`Something went wrong ${err}`);
+  });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
